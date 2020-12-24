@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Last update : December, 2020
+# Author: cetin.ardal@oracle.com
+# Description: Launch a proxy_vpn container and start chrome configured with proxy in dedicated browser profile
+
+script_name=$(basename "$0")
+version="1.0.0"
+echo "running $script_name - version $version"
+echo
+
+echo "Make sure VPN and Proxy are both up"
+/<path-to>/start_proxy_vpn.sh
+
+echo
+echo "--> Launching Chrome with dedicated browser profile and Proxy active"
+
+alias chrome_with_proxy="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --profile-directory=Profile\ 2 >/dev/null 2>&1 &"
+
+chrome_with_proxy

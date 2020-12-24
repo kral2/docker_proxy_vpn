@@ -1,0 +1,6 @@
+.vscode
+.DS_Store
+*mysecret.txt
+*entrypoint.sh
+*start_proxy_vpn.sh
+*intranet.command

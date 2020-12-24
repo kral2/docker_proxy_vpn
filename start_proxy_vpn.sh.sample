@@ -1,0 +1,60 @@
+#!/bin/sh
+
+# Last update : December, 2020
+# Author: cetin.ardal@oracle.com
+# Description: Launch a proxy_vpn container if there is none running
+
+script_name=$(basename "$0")
+version="1.0.0"
+echo "running $script_name - version $version"
+
+TEST_URL=https://<myprivatewebite.com> # enter an URL that should be accessible only with VPN UP
+MYPORT=3233
+VPN_NAME="<My Corp>"
+CONTAINER=myvpn_corp
+IMAGE=proxy_vpn:2020.12
+LOGS_DIR=$HOME/containers_logs/squid
+
+# Create $CONTAINER if it is not RUNNING
+if [ ! "$(docker ps -q -f name=$CONTAINER)" ]; then
+    echo "No $CONTAINER container running."
+    # check if there is no EXITED container named $CONTAINER. Cleanup if there is.
+    if [ "$(docker ps -aq -f status=exited -f name=$CONTAINER)" ]; then
+        echo "$CONTAINER container found in exited status -> Cleanup and recreate."
+        docker rm $CONTAINER
+    fi
+    echo "Launching Docker container for $VPN_NAME with image $IMAGE"
+    docker run --name $CONTAINER --privileged  -p $MYPORT:$MYPORT -v $LOGS_DIR:/var/log/squid -d $IMAGE
+else
+    echo "$CONTAINER container is already running."
+fi
+
+# Test if $TEST_URL is reachable (intranet resource)
+export http_proxy=localhost:$MYPORT
+export https_proxy=localhost:$MYPORT
+echo "Testing connection status with $TEST_URL ..."
+
+wget -q -O - $TEST_URL  >/dev/null
+WGET_ERROR_CODE=$?
+
+# Wait for 30s until $TEST_URL is reachable or exit 
+WAIT_TIMEOUT=0
+while [ $WGET_ERROR_CODE -ne 0 ] && [ $WAIT_TIMEOUT -ne 30 ]
+do
+    echo "Proxy_VPN not yet available. WGET Error code=$WGET_ERROR_CODE ..."
+    sleep 5
+    wget -q -O - $TEST_URL >/dev/null
+    WGET_ERROR_CODE=$?
+    WAIT_TIMEOUT=$((WAIT_TIMEOUT + 5))
+done
+
+# Evaluate status and inform user
+if [ $WGET_ERROR_CODE -eq 0 ]; then
+    # Success: Intranet resources reachable
+    echo "Proxy_VPN is ready"
+    docker exec $CONTAINER squid -v |grep Version
+    docker exec $CONTAINER openconnect -V |grep version
+else
+    # Failure: Intranet resources unreachable
+    echo "-> Error: $TEST_URL is unreachable. Check your $CONTAINER container entrypoint script."
+fi

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Last update : December, 2020
+# Author: cetin.ardal@oracle.com
+# Description: Restart Squid and open an VPN session
+
+#restart squid
+service squid stop
+cat mysecret.txt | xargs |openconnect <myvpnaccess.corp.com> -u <vpnuser> --authgroup=Corp-VPN --passwd-on-stdin --no-dtls --background --disable-ipv6
+# -N: foreground
+sleep 2
+squid -N
