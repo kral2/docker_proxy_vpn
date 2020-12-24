@@ -48,15 +48,17 @@ Browser and extension may be changed for other components that better suit your 
 
 ## For more than HTTP/HTTPS
 
-You can already reach your private resources with any protocol supported by Squid. But you can also combine this solution with tools like [corkscrew](https://github.com/bryanpkc/corkscrew) to reach SSH private targets.
+You can already reach your private resources with any protocol configured in Squid (ftp, ssh, gopher, etc ...)
+
+But you can also combine this solution with tools like [corkscrew](https://github.com/bryanpkc/corkscrew) to reach SSH private targets.
 
 ## Visibility
 
-You Proxy logs are redirected to your your computer.
+Your Proxy logs are redirected to your computer in a local folder. Thanks Docker Volumes.
 
 ## Next versions
 
-Some thoughts about what could come next:
+Some ideas about what could come next:
 
 - Visibility: redirect Openconnect VPN logs to a Docker Volume
 - Security: conceal the vpnpassword in a local vault solution
@@ -66,16 +68,16 @@ Some thoughts about what could come next:
 ## Maintainers and Contributors
 
 The initial idea and prototype were created by Matthieu Bordonné.
-Version 0.1.0 is the code adapted by Christophe Pauliat, containing helper scripts for easier day-to-day interaction on a user computer.
+Version 0.1.0 is the code adapted by [Christophe Pauliat](https://github.com/cpauliat), containing helper scripts for easier day-to-day interaction on a user computer.
 
-Current version is actually maintained by Çetin Ardal.
+Current version is actually maintained by [Çetin Ardal](https://github.com/kral2).
 
 ## Contributing
 
 This project is open source : all contributions are welcome.
 
-- for small typo/enhancement, just Fork and submit a Pull Request,
-- for new features or substential changes, please open an issue first to discuss about the intended change.
+- for small typo/enhancements, just [Fork this on GitHub](https://github.com/kral2/docker_proxy_vpn/fork) and submit a [Pull Request](https://github.com/kral2/docker_proxy_vpn/pulls),
+- for new features or substantial changes, please open an [Issue](https://github.com/kral2/docker_proxy_vpn/issues) first to discuss about the intended change.
 
 ## License
 
