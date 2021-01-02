@@ -10,9 +10,9 @@ echo "running $script_name - version $version"
 
 TEST_URL=https://<myprivatewebite.com> # enter an URL that should be accessible only with VPN UP
 MYPORT=3233
-VPN_NAME="<My Corp>"
+VPN_NAME="<My Corp>" # name your vpn
 CONTAINER=myvpn_corp
-IMAGE=proxy_vpn:2020.12
+IMAGE=proxy_vpn:2021.01 # get the exact image name and tag from 0_build_image.sh output
 LOGS_DIR=$HOME/containers_logs/squid
 
 # Create $CONTAINER if it is not RUNNING
@@ -24,7 +24,7 @@ if [ ! "$(docker ps -q -f name=$CONTAINER)" ]; then
         docker rm $CONTAINER
     fi
     echo "Launching Docker container for $VPN_NAME with image $IMAGE"
-    docker run --name $CONTAINER --privileged  -p $MYPORT:$MYPORT -v $LOGS_DIR:/var/log/squid -d $IMAGE
+    docker run --name $CONTAINER --env-file $(dirname $(realpath $0))/env.list --privileged  -p $MYPORT:$MYPORT -v $LOGS_DIR:/var/log/squid -d $IMAGE
 else
     echo "$CONTAINER container is already running."
 fi

@@ -10,7 +10,7 @@ echo "running $script_name - version $version"
 echo
 
 echo "Make sure VPN and Proxy are both up"
-/<path-to>/start_proxy_vpn.sh
+/path/to/start_proxy_vpn.sh
 
 echo
 echo "--> Launching Chrome with dedicated browser profile and Proxy active"

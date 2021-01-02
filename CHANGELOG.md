@@ -12,6 +12,18 @@ Given a version number MAJOR.MINOR.PATCH:
 
 Each CHANGELOG entry may have these type of changes : added, changed, deprecated, removed, fixed, security
 
+## [unreleased] 2021-01-02
+
+### Changed
+
+- Docker/entrypoint.sh now use environment variables passed by `docker run` command
+- 0_build_image.sh now generates a local file with environemnt variables
+
+### Removed
+
+- Docker/entrypoint.sh.sample is no longer needed.
+- mysecret.txt is no longer needed
+
 ## [0.2.0] 2020-12-25
 
 ### Added

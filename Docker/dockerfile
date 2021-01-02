@@ -1,6 +1,8 @@
 FROM ubuntu:20.04
 LABEL maintainer=kral2
-LABEL version="0.2.0"
+LABEL name=proxy_vpn
+LABEL date="2021.01.02"
+LABEL version="0.2.1"
 
 WORKDIR /app
 ENV DEBIAN_FRONTEND=noninteractive
@@ -12,6 +14,5 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 COPY squid.conf /etc/squid/squid.conf
 COPY entrypoint.sh ./entrypoint.sh
-COPY mysecret.txt ./mysecret.txt
 RUN chmod +x ./entrypoint.sh
 ENTRYPOINT ./entrypoint.sh

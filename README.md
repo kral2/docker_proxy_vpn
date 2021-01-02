@@ -5,6 +5,8 @@ Proxy_VPN is a Docker container image that combines Squid and Openconnect VPN fo
 - you prefer to not install VPN client software on your local computer,
 - you want to keep an unmodified network access for your local computer, without relying on the VPN policies or configuration.
 
+It is configured Cisco AnyConnect VPN.
+
 In the current architecture, the Container assume two roles:
 
 1. initiating a VPN session to your private resources,
@@ -17,11 +19,9 @@ In the current architecture, the Container assume two roles:
 
 ## How to get started?
 
-- modify entrypoint.sh.sample script : change your vpn connection url, your user name and rename it to entrypoint.sh 
-- execute entrypoint.sh and type your vpn password when prompted
-- execute 0_build_image.sh to build the container image from the Dockerfile
-- modify start_proxy_vpn.sh.sample script : change `TEST_URL`, `VPN_NAME` and rename it to start_proxy_vpn.sh
-- execute start_proxy_vpn.sh to create container.
+- execute 0_build_image.sh and type your VPN URL/User/Password when prompted
+- modify start_proxy_vpn.sh.sample script : change `TEST_URL`, `VPN_NAME`, `IMAGE` and remove the .sample extension
+- execute start_proxy_vpn.sh to create the container.
 - configure your system or your internet browser to use localhost:3233 as your proxy
 
 ## macOS UX
@@ -39,7 +39,7 @@ Some Browser configuration is implied for as a prerequisite:
 - create a new browser profile dedicated for proxy_vpn usage and retrieve its id number (type `chrome://version/`in the address bar),
 - install a Chrome extension that allows you to specify a proxy and configure it (I use Foxy Proxy), 
 
-Once everything is setup, you can simply launch `intranet.command` from the spotlight launcher:
+Once everything is setup, you can simply launch `intranet.command` from spotlight:
 
 - proxy_vpn will be launched,
 - Chrome with the profile configured for your local proxy usage will be launched.
