@@ -12,6 +12,12 @@ Given a version number MAJOR.MINOR.PATCH:
 
 Each CHANGELOG entry may have these type of changes : added, changed, deprecated, removed, fixed, security
 
+## [0.2.2] 2021-06-11
+
+### Changed
+
+- Update system packages
+
 ## [0.2.1] 2021-01-02
 
 ### Changed

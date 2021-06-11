@@ -1,11 +1,12 @@
 FROM ubuntu:20.04
 LABEL maintainer=kral2
 LABEL name=proxy_vpn
-LABEL date="2021.01.02"
-LABEL version="0.2.1"
+LABEL date="2021.06.11"
+LABEL version="0.2.2"
 
 WORKDIR /app
 ENV DEBIAN_FRONTEND=noninteractive
+ENV LAST_UPDATED=2021-06-11
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     net-tools \
     openconnect \

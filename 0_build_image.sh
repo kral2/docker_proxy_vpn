@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last update : January, 2021
+# Last update : June, 2021
 # Author: cetin.ardal@oracle.com
 # Description: Build a new image and remove danglings
 

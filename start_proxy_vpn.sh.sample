@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Last update : December, 2020
+# Last update : June, 2021
 # Author: cetin.ardal@oracle.com
 # Description: Launch a proxy_vpn container if there is none running
 
@@ -8,11 +8,11 @@ script_name=$(basename "$0")
 version="1.0.0"
 echo "running $script_name - version $version"
 
-TEST_URL=https://<myprivatewebite.com> # enter an URL that should be accessible only with VPN UP
+TEST_URL=https://<myprivatewebsite.com> # enter an URL that should be accessible only with VPN UP
 MYPORT=3233
 VPN_NAME="<My Corp>" # name your vpn
 CONTAINER=myvpn_corp
-IMAGE=proxy_vpn:2021.01 # get the exact image name and tag from 0_build_image.sh output
+IMAGE=proxy_vpn:2021.06 # get the exact image name and tag from 0_build_image.sh output
 LOGS_DIR=$HOME/containers_logs/squid
 
 # Create $CONTAINER if it is not RUNNING
