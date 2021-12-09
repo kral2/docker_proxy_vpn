@@ -5,7 +5,7 @@ Proxy_VPN is a Docker container image that combines Squid and Openconnect VPN fo
 - you prefer to not install VPN client software on your local computer,
 - you want to keep an unmodified network access for your local computer, without relying on the VPN policies or configuration.
 
-It is configured Cisco AnyConnect VPN.
+It is configured for Cisco AnyConnect VPN.
 
 In the current architecture, the Container assume two roles:
 
@@ -37,7 +37,7 @@ For best usage of this helper, you should modify it to suit your environment the
 Some Browser configuration is implied for as a prerequisite:
 
 - create a new browser profile dedicated for proxy_vpn usage and retrieve its id number (type `chrome://version/`in the address bar),
-- install a Chrome extension that allows you to specify a proxy and configure it (I use Foxy Proxy), 
+- install a Chrome extension that allows you to specify a proxy and configure it (I use Foxy Proxy).
 
 Once everything is setup, you can simply launch `intranet.command` from spotlight:
 
@@ -63,7 +63,7 @@ Some ideas about what could come next:
 - Visibility: redirect Openconnect VPN logs to a Docker Volume
 - Security: conceal the vpnpassword in a local vault solution
 - Architecture: split to dedicated containers for proxy and vpn roles
-- Availability: use a container orchestration solution to act as a watchdog 
+- Availability: use a container orchestration solution to act as a watchdog
 
 ## Maintainers and Contributors
 

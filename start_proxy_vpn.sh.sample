@@ -12,7 +12,7 @@ TEST_URL=https://<myprivatewebsite.com> # enter an URL that should be accessible
 MYPORT=3233
 VPN_NAME="<My Corp>" # name your vpn
 CONTAINER=myvpn_corp
-IMAGE=proxy_vpn:2021.09 # get the exact image name and tag from 0_build_image.sh output
+IMAGE=proxy_vpn:2021.12 # get the exact image name and tag from 0_build_image.sh output
 LOGS_DIR=$HOME/containers_logs/squid
 
 # Create $CONTAINER if it is not RUNNING
