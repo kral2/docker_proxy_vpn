@@ -11,7 +11,7 @@ echo "running $script_name - version $version"
 IMAGE=proxy_vpn
 TAG="$(date +%Y.%m)"
 
-# Generates the env.list file to be used by Docker run command in start_proxy_vpn.sh
+# Generates the env.list file to be used by podman run command in start_proxy_vpn.sh
 
 if [ ! -f "env.list" ]; then
     read -r -p "VPN_URL: " VPN_URL
@@ -25,18 +25,18 @@ fi
 
 # Build image with tag set to year.month
 
-docker build Docker/ --tag "$IMAGE":"$TAG"
+podman build Docker/ --tag "$IMAGE":"$TAG"
 
-Docker_build_ERROR_CODE=$?
-if [ $Docker_build_ERROR_CODE -eq 0 ]; then
+podman_build_ERROR_CODE=$?
+if [ $podman_build_ERROR_CODE -eq 0 ]; then
     echo "Generated Image: $IMAGE:$TAG"
 else
-    echo "-> Error $Docker_build_ERROR_CODE"
+    echo "-> Error $podman_build_ERROR_CODE"
 fi
 
 # Image cleanup - remove dangling proxy_vpn images
 
-if [ "$(docker images --filter "dangling=true" --filter "label=name=$IMAGE" -q)" ]; then
+if [ "$(podman images --filter "dangling=true" --filter "label=name=$IMAGE" -q)" ]; then
     echo "Dang!! Will remove the last $IMAGE dangling image"
-    docker rmi -f "$(docker images --filter "dangling=true" --filter "label=name=$IMAGE" -q)"
+    podman rmi -f "$(podman images --filter "dangling=true" --filter "label=name=$IMAGE" -q)"
 fi

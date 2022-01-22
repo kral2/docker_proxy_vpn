@@ -12,6 +12,13 @@ Given a version number MAJOR.MINOR.PATCH:
 
 Each CHANGELOG entry may have these type of changes : added, changed, deprecated, removed, fixed, security
 
+## [0.3.0] 2022-01-22
+
+### Changed
+
+- BREAKING CHANGE: helper scripts expect podman instead of docker
+- BREAKING CHANGE: Redirecting Squid proxy logs to a local folder is not supported in this version. This feature may come back in a later version.
+
 ## [0.2.3] 2021-09-06
 
 ### Changed

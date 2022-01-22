@@ -11,10 +11,10 @@ echo "running $script_name - version $version"
 
 CONTAINER=myvpn_corp
 
-if [ "$(docker ps -qa -f name=$CONTAINER)" ]; then
-    echo "Stopping and deleting Docker $CONTAINER container"
-    docker stop $CONTAINER
-    docker rm $CONTAINER
+if [ "$(podman ps -qa -f name=$CONTAINER)" ]; then
+    echo "Stopping and deleting podman $CONTAINER container"
+    podman stop $CONTAINER
+    podman rm $CONTAINER
 else
     echo "No $CONTAINER container found."
 fi

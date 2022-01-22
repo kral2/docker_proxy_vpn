@@ -14,14 +14,14 @@ In the current architecture, the Container assume two roles:
 
 ## Requirements
 
-- a Docker host running on your local computer,
+- a podman machine running on your local computer,
 - bash interpreter.
 
 ## How to get started?
 
-- execute 0_build_image.sh and type your VPN URL/User/Password when prompted
-- modify start_proxy_vpn.sh.sample script : change `TEST_URL`, `VPN_NAME`, `IMAGE` and remove the .sample extension
-- execute start_proxy_vpn.sh to create the container.
+- execute `0_build_image.sh` and type your VPN URL/User/Password when prompted
+- modify `start_proxy_vpn.sh.sample` script : change `TEST_URL`, `VPN_NAME`, `IMAGE` and remove the .sample extension
+- execute `start_proxy_vpn.sh` to create the container.
 - configure your system or your internet browser to use localhost:3233 as your proxy
 
 ## macOS UX
@@ -54,13 +54,16 @@ But you can also combine this solution with tools like [corkscrew](https://githu
 
 ## Visibility
 
-Your Proxy logs are redirected to your computer in a local folder. Thanks Docker Volumes.
+The log redirection to a volume is not supported in this version. This feature may come back in a later version.
+
+> Your Proxy logs are redirected to your computer in a local folder. Thanks Docker Volumes.
+
 
 ## Next versions
 
 Some ideas about what could come next:
 
-- Visibility: redirect Openconnect VPN logs to a Docker Volume
+- Visibility: redirect Openconnect VPN logs to a podman Volume
 - Security: conceal the vpnpassword in a local vault solution
 - Architecture: split to dedicated containers for proxy and vpn roles
 - Availability: use a container orchestration solution to act as a watchdog
