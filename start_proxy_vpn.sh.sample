@@ -1,11 +1,11 @@
 #!/bin/sh
 
-# Last update : June, 2021
+# Last update : April, 2021
 # Author: cetin.ardal@oracle.com
 # Description: Launch a proxy_vpn container if there is none running
 
 script_name=$(basename "$0")
-version="1.0.0"
+version="1.1.0"
 echo "running $script_name - version $version"
 
 TEST_URL=https://<myprivatewebsite.com> # enter an URL that should be accessible only with VPN UP
@@ -15,16 +15,25 @@ CONTAINER=myvpn_corp
 IMAGE=proxy_vpn:2021.12 # get the exact image name and tag from 0_build_image.sh output
 LOGS_DIR=$HOME/containers_logs/squid
 
+# start podman machine before starting the container
+podman_machine_status=$(podman machine list --format '{{.LastUp}}')
+
+if [ "$podman_machine_status" != "Currently running" ]; then
+    podman machine start
+else
+    echo "podman machine is $podman_machine_status"
+fi
+
 # Create $CONTAINER if it is not RUNNING
-if [ ! "$(docker ps -q -f name=$CONTAINER)" ]; then
+if [ ! "$(podman ps -q -f name=$CONTAINER)" ]; then
     echo "No $CONTAINER container running."
     # check if there is no EXITED container named $CONTAINER. Cleanup if there is.
-    if [ "$(docker ps -aq -f status=exited -f name=$CONTAINER)" ]; then
+    if [ "$(podman ps -aq -f status=exited -f name=$CONTAINER)" ]; then
         echo "$CONTAINER container found in exited status -> Cleanup and recreate."
-        docker rm $CONTAINER
+        podman rm $CONTAINER
     fi
-    echo "Launching Docker container for $VPN_NAME with image $IMAGE"
-    docker run --name $CONTAINER --env-file $(dirname $(realpath $0))/env.list --privileged  -p $MYPORT:$MYPORT -v $LOGS_DIR:/var/log/squid -d $IMAGE
+    echo "Launching podman container for $VPN_NAME with image $IMAGE"
+    podman run --name $CONTAINER --env-file $(dirname $(realpath $0))/env.list --privileged  -p $MYPORT:$MYPORT -d $IMAGE #-v $LOGS_DIR:/var/log/squid
 else
     echo "$CONTAINER container is already running."
 fi
@@ -52,8 +61,8 @@ done
 if [ $WGET_ERROR_CODE -eq 0 ]; then
     # Success: Intranet resources reachable
     echo "Proxy_VPN is ready"
-    docker exec $CONTAINER squid -v |grep Version
-    docker exec $CONTAINER openconnect -V |grep version
+    podman exec $CONTAINER squid -v |grep Version
+    podman exec $CONTAINER openconnect -V |grep version
 else
     # Failure: Intranet resources unreachable
     echo "-> Error: $TEST_URL is unreachable. Check your $CONTAINER container entrypoint script."

@@ -12,6 +12,12 @@ Given a version number MAJOR.MINOR.PATCH:
 
 Each CHANGELOG entry may have these type of changes : added, changed, deprecated, removed, fixed, security
 
+## [0.4.0] 2022-01-23
+
+### Changed
+
+- add podman machine start or stop actions before taking action on the proxy_vpn container
+
 ## [0.3.0] 2022-01-22
 
 ### Changed
