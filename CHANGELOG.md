@@ -12,6 +12,12 @@ Given a version number MAJOR.MINOR.PATCH:
 
 Each CHANGELOG entry may have these type of changes : added, changed, deprecated, removed, fixed, security
 
+## [0.4.1] 2022-02-03
+
+### Fixed
+
+- podman machine takes a few seconds to stop. adding a timer so we can cycle stop/start scripts
+
 ## [0.4.0] 2022-01-23
 
 ### Changed
